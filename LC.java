@@ -21,4 +21,21 @@ public class LC{
         }
         return false;
     }
+
+	public int maxArea(int[] height) {
+        int left = 0, right = height.length-1;
+        int width = height.length-1;
+        int len = 0;
+        int ans = 0;
+        while(left <= right){
+            len = Math.min(height[left], height[right]);
+            ans = Math.max(ans, len*width);
+            width--;
+            if(height[left] < height[right])
+                left++;
+            else
+                right--;
+        }
+        return ans;
+    }
 }
