@@ -115,4 +115,24 @@ public class LC{
             recurse(res, left, right + 1, s + ")", n);
         }
     }
+
+     public String interpret(String command) {
+       int l = 0, r = 0;
+       String al = "(al)";
+       String p = "()";
+       String res = "";
+       while(l < command.length()){
+           if(command.charAt(l) == 'G'){
+               res += "G";
+           }else if(command.charAt(l) == '(' && command.charAt(l+1) == ')'){
+               res += "o";
+               l++;
+           }else{
+               res += "al";
+               l+=3;
+           }
+           l++;
+       }
+        return res;
+    }
 }
