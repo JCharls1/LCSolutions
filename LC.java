@@ -135,4 +135,61 @@ public class LC{
        }
         return res;
     }
+
+
+    /**
+     * 1945. Sum of Digits of String After Convert
+     */
+    public int getLucky(String s, int k) {
+        ArrayList<Integer> arr = new ArrayList<Integer>();
+        int result = 0;
+        arr = breakDown(s);
+
+        for(int i = 0; i < k; i++){
+            result = addNums(arr);
+            if(k > 1 && i < k-1){
+                arr = divideDigits(result);
+            }
+        }
+        return result;
+    }
+
+    public ArrayList<Integer> breakDown(String s){
+        ArrayList<Integer> res = new ArrayList<Integer>();
+        String z = "";
+
+        for(int i = 0; i < s.length(); i++){
+            z += s.charAt(i) - 'a' + 1;
+        }
+        // int bruh = 0;
+        for(int i = 0; i < z.length(); i++){
+            int a = z.charAt(i) - 48;       
+            res.add(a);
+        }
+        
+        return res;
+    }
+
+    public int addNums(ArrayList<Integer> arr){
+        int a = 0;
+        for(int i = 0; i < arr.size(); i++){
+            a += arr.get(i);
+        }
+        return a;
+    }
+
+    public ArrayList<Integer> divideDigits(int a){
+        String b = Integer.toString(a);
+        ArrayList<Integer> res = new ArrayList<Integer>();
+
+        for(int i = 0; i < b.length(); i++){
+            res.add(b.charAt(i) - 48);
+        }
+
+        return res;
+    }
+    /**
+     * 1945. Sum of Digits of String After Convert
+     */
+
 }
