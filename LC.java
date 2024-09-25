@@ -212,4 +212,23 @@ public class LC{
     }
     /**11. Container with most water */
     
+    public int removeElement(int[] nums, int val) {
+
+        int l = 0, r = nums.length-1, count = nums.length;
+        while(l <= r){
+            while(l <= r && nums[l] == val){
+                swap(l, r, nums);
+                r--;
+                count--;
+            }
+            l++;
+        }
+        return count;
+    }
+
+    private void swap(int a, int b, int[] arr){
+        int temp = arr[a];
+        arr[a] = arr[b];
+        arr[b] = temp;
+    }
 }
