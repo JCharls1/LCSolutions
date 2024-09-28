@@ -231,4 +231,53 @@ public class LC{
         arr[a] = arr[b];
         arr[b] = temp;
     }
+
+    /**
+     * 
+     *  Trapping rain water
+     */
+    public int trap(int[] height) {
+        //       0 1 2 3 4 5 6 7 8 9 10 11
+        // l - r 0 0 1 1 2 2 2 2 3 3 3  3
+        //       4 4 4 4 4 4 4 2 2 2 1  1
+        //       0 0 1 0 1 2 1 0 0 1 0  0
+        // r - l 1 1 2 2 2 4 4 4 4 4 4  4
+        //       0 1 0 2 1 0 1 3 2 1 2  1
+        //                               
+
+        ArrayList<Integer> LtoR = new ArrayList<Integer>();
+        ArrayList<Integer> RtoL = new ArrayList<Integer>();
+        int max = 0;
+        for(int i = 0; i < height.length; i++){
+            LtoR.add(max);
+            max = height[i] > max ? height[i] : max;
+        }
+        max = 0;
+        for(int i = height.length-1; i >= 0; i--){
+            RtoL.add(max);
+            max = height[i] > max ? height[i] : max;
+        }
+
+        // System.out.println(RtoL);
+        // System.out.println(LtoR);
+        // System.out.println(reverseList(RtoL));
+        RtoL = reverseList(RtoL);
+        int res = 0;
+        for(int i = 0; i < height.length; i++){
+            int min = Math.min(RtoL.get(i), LtoR.get(i));
+            res += min - height[i] < 0 ? 0 : min - height[i];
+        }
+        // System.out.println(res);
+        return res;
+    }
+
+    public static ArrayList<Integer> reverseList(ArrayList<Integer> list){
+        ArrayList<Integer> res = new ArrayList<Integer>();
+        for(int i = list.size()-1; i >= 0; i--){
+            res.add(list.get(i));
+        }
+        return res;
+    }
+
+    // trapping rain water
 }
